@@ -8,7 +8,7 @@ pipeline {
   stages {
     stage('Deploy to cluster -> one cloud') {
       steps {
-        withCredentials([string(credentialsId: '', variable: 'OCP_stoken')]){
+        withCredentials([string(credentialsId: 'onecloud-sa-jenkins-token', variable: 'OCP_stoken')]){
         script {
 	try{
                   //def code = sh(script: """curl -L -k -I -s -w '%{code}' -H 'Authorization: Bearer \$CLUSTER_AUTH_TOKEN' \$OCP_SERVER_URL""", returnStdout: true)
@@ -73,7 +73,7 @@ if(response_code!=null){
         environment name: 'DEPLOY_ON_FAILURE', value: 'true'
       }
       steps {
-        withCredentials([string(credentialsId: 'POK token of service account jenkins in zfw-jenkins-ocpadmins namespace', variable: 'OCP_stoken')]){
+        withCredentials([string(credentialsId: 'ocp2onz-ocpadmins-jenkins-sa', variable: 'OCP_stoken')]){
         script {
           
             try {
